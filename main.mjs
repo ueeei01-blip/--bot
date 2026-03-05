@@ -156,6 +156,8 @@ client.once("ready", () => {
   console.log(`✅ Logged in as ${client.user.tag}`);
 });
 
+console.log("TOKEN EXISTS:", !!process.env.DISCORD_TOKEN);
+
 client.login(process.env.DISCORD_TOKEN);
 
 import http from "http";
