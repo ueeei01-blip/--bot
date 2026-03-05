@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import { Client, GatewayIntentBits } from "discord.js";
 import fs from "fs";
 
@@ -149,4 +152,19 @@ Legendary : ${h.Legendary}`
   }
 });
 
+client.once("ready", () => {
+  console.log(`✅ Logged in as ${client.user.tag}`);
+});
+
+console.log("TOKEN EXISTS:", !!process.env.DISCORD_TOKEN);
+
 client.login(process.env.DISCORD_TOKEN);
+
+import http from "http";
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end("Bot is running");
+});
+
+server.listen(process.env.PORT || 3000);
