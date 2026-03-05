@@ -1,11 +1,23 @@
-console.log("STARTING BOT...");
-
+// =============================
+// 🔥 すべてのimportは一番上
+// =============================
 import dotenv from "dotenv";
-dotenv.config();
-
 import { Client, GatewayIntentBits } from "discord.js";
 import fs from "fs";
+import http from "http";
 
+console.log("STARTING BOT...");
+
+// =============================
+// 🔐 環境変数読み込み
+// =============================
+dotenv.config();
+
+console.log("TOKEN EXISTS:", !!process.env.DISCORD_TOKEN);
+
+// =============================
+// 🤖 Discordクライアント
+// =============================
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -14,7 +26,16 @@ const client = new Client({
   ]
 });
 
+// =============================
+// 💾 データファイル
+// =============================
 const DATA_FILE = "./gachaData.json";
+
+// データ読み込み
+let userData = {};
+if (fs.existsSync(DATA_FILE)) {
+  userData = JSON.parse(fs.readFileSync(DATA_FILE));
+}
 
 // =============================
 // 🎲 排出率
@@ -28,7 +49,7 @@ const rarityRates = {
 };
 
 // =============================
-// 🎯 絵文字テーブル（均等）
+// 🎯 絵文字テーブル
 // =============================
 const emojiTable = {
   Normal: [
@@ -53,18 +74,12 @@ const emojiTable = {
 };
 
 // =============================
-// 💾 データ読み込み
-// =============================
-let userData = {};
-if (fs.existsSync(DATA_FILE)) {
-  userData = JSON.parse(fs.readFileSync(DATA_FILE));
-}
-
-// =============================
-// 📅 JST日付
+// 📅 JST日付取得
 // =============================
 function getTodayJST() {
-  return new Date().toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" });
+  return new Date().toLocaleDateString("ja-JP", {
+    timeZone: "Asia/Tokyo"
+  });
 }
 
 // =============================
@@ -81,7 +96,7 @@ function rollRarity() {
 }
 
 // =============================
-// 🎯 絵文字抽選（均等）
+// 🎯 絵文字抽選
 // =============================
 function rollEmoji(rarity) {
   const list = emojiTable[rarity];
@@ -93,6 +108,7 @@ function rollEmoji(rarity) {
 // =============================
 client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
+
   const userId = message.author.id;
 
   // 🍑 ガチャ
@@ -133,7 +149,7 @@ Rarity：${rarity}`
     );
   }
 
-  // 📊 履歴
+  // 📊 履歴確認
   if (message.content === "桃履歴") {
 
     if (!userData[userId]) {
@@ -154,19 +170,24 @@ Legendary : ${h.Legendary}`
   }
 });
 
+// =============================
+// ✅ ログイン成功
+// =============================
 client.once("ready", () => {
   console.log(`✅ Logged in as ${client.user.tag}`);
 });
 
-console.log("TOKEN EXISTS:", !!process.env.DISCORD_TOKEN);
-
+// =============================
+// 🔑 ログイン処理
+// =============================
 client.login(process.env.DISCORD_TOKEN)
   .catch(err => {
     console.error("LOGIN ERROR:", err);
   });
 
-import http from "http";
-
+// =============================
+// 🌐 Render用ダミーサーバー
+// =============================
 const server = http.createServer((req, res) => {
   res.writeHead(200);
   res.end("Bot is running");
