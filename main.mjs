@@ -150,3 +150,12 @@ Legendary : ${h.Legendary}`
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
+import http from "http";
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end("Bot is running");
+});
+
+server.listen(process.env.PORT || 3000);
