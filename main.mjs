@@ -1,3 +1,5 @@
+console.log("STARTING BOT...");
+
 import dotenv from "dotenv";
 dotenv.config();
 
