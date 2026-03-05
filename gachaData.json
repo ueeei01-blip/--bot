@@ -1,11 +1,16 @@
 {
   "1215667431544987689": {
+
     "lastRoll": "2026/3/6",
+
+    "lastRoll": "2026/3/5",
+
     "history": {
       "N": 0,
       "R": 1,
       "SR": 0,
       "M": 0,
+
       "SSR": 0,
       "Normal": null
     }
@@ -14,6 +19,15 @@
     "lastRoll": "2026/3/6",
     "history": {
       "Normal": 1,
+
+      "SSR": 0
+    }
+  },
+  "1215783988422246492": {
+    "lastRoll": "2026/3/5",
+    "history": {
+      "Normal": 0,
+
       "Rare": 1,
       "Super Rare": 0,
       "Secret": 0,
@@ -49,6 +63,7 @@
       "Secret": 0,
       "Legendary": 0
     }
+
   },
   "1228947386806566952": {
     "lastRoll": "2026/3/6",
@@ -59,5 +74,7 @@
       "Secret": 0,
       "Legendary": 0
     }
+
+
   }
 }

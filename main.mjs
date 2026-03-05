@@ -158,7 +158,10 @@ client.once("ready", () => {
 
 console.log("TOKEN EXISTS:", !!process.env.DISCORD_TOKEN);
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN)
+  .catch(err => {
+    console.error("LOGIN ERROR:", err);
+  });
 
 import http from "http";
 
